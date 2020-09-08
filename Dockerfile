@@ -3,7 +3,7 @@ FROM electreon/stm32cubeide:1.4.0.v1
 WORKDIR /root
 
 ##git checkout
-RUN git clone git@bitbucket.org:Electreon/st-firmware-v2.git
+#RUN git clone git@bitbucket.org:Electreon/st-firmware-v2.git
 
 ##Version
 
