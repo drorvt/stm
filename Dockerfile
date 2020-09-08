@@ -10,11 +10,13 @@ WORKDIR /root
 # ENV STM32QUBEIDE_INSTALLATION_FILE=${STM32QUBEIDE_INSTALLATION_FILE:-en.st-stm32cubeide_1.4.0_7511_20200720_0928_amd64_sh.zip}
 # ENV STM32QUBEIDE_VERSION=$("echo "$STM32QUBEIDE_INSTALLATION_FILE" | sed 's/^.*_\([0-9]\+\.[0-9]\+\.[0-9]\+\)_.*/\1/'")
 
-RUN STM32QUBEIDE_INSTALLATION_FILE="${STM32QUBEIDE_INSTALLATION_FILE:-en.st-stm32cubeide_1.4.0_7511_20200720_0928_amd64_sh.zip}" 
-RUN STM32QUBEIDE_VERSION="$("echo "$STM32QUBEIDE_INSTALLATION_FILE" | sed 's/^.*_\([0-9]\+\.[0-9]\+\.[0-9]\+\)_.*/\1/'")" && echo STM32QUBEIDE_VERSION
+#RUN STM32QUBEIDE_INSTALLATION_FILE="${STM32QUBEIDE_INSTALLATION_FILE:-en.st-stm32cubeide_dr_7511_20200720_0928_amd64_sh.zip}" 
+#RUN STM32QUBEIDE_VERSION="$("echo "$STM32QUBEIDE_INSTALLATION_FILE" | sed 's/^.*_\([0-9]\+\.[0-9]\+\.[0-9]\+\)_.*/\1/'")" && echo STM32QUBEIDE_VERSION
+RUN mkdir -p /tmp/dir && touch /tmp/dir/file1 /tmp//dir/file2
+RUN file="$(ls -1 /tmp/dir)" && echo $file
+RUN echo $(ls -1 /tmp/dir)
 
-
-RUN file="$(ls)" && echo $file
+RUN echo $STM32QUBEIDE_VERSION
 
 
 ##Create workspace by importing the project & building it
