@@ -7,13 +7,15 @@ WORKDIR /root
 
 ##Version
 
-ENV STM32QUBEIDE_INSTALLATION_FILE=${STM32QUBEIDE_INSTALLATION_FILE:-en.st-stm32cubeide_1.4.0_7511_20200720_0928_amd64_sh.zip}
-ENV STM32QUBEIDE_VERSION=$("echo "$STM32QUBEIDE_INSTALLATION_FILE" | sed 's/^.*_\([0-9]\+\.[0-9]\+\.[0-9]\+\)_.*/\1/'")
+# ENV STM32QUBEIDE_INSTALLATION_FILE=${STM32QUBEIDE_INSTALLATION_FILE:-en.st-stm32cubeide_1.4.0_7511_20200720_0928_amd64_sh.zip}
+# ENV STM32QUBEIDE_VERSION=$("echo "$STM32QUBEIDE_INSTALLATION_FILE" | sed 's/^.*_\([0-9]\+\.[0-9]\+\.[0-9]\+\)_.*/\1/'")
 
-RUN echo $STM32QUBEIDE_VERSION
+RUN STM32QUBEIDE_INSTALLATION_FILE="${STM32QUBEIDE_INSTALLATION_FILE:-en.st-stm32cubeide_1.4.0_7511_20200720_0928_amd64_sh.zip}" 
+RUN STM32QUBEIDE_VERSION="$("echo "$STM32QUBEIDE_INSTALLATION_FILE" | sed 's/^.*_\([0-9]\+\.[0-9]\+\.[0-9]\+\)_.*/\1/'")" && echo STM32QUBEIDE_VERSION
 
-RUN file="$(ls -1 )" && echo $file
-RUN echo $(ls -1)
+
+RUN file="$(ls)" && echo $file
+
 
 ##Create workspace by importing the project & building it
 RUN /opt/st/stm32cubeide_${STM32QUBEIDE_VERSION}/stm32cubeide --launcher.suppressErrors -nosplash -application org.eclipse.cdt.managedbuilder.core.headlessbuild -data /root/workspace -import /root/st-firmware-v2/
